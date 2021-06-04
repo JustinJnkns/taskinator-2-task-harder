@@ -1,10 +1,15 @@
 // ; Are optional in JS dont forget.
-var saveBtn = document.querySelector('#save-task')
+var form = document.querySelector('#task-form')
 var tasksToDoE1 = document.querySelector('#tasks-to-do')
-var createTaskHandler = function(){
+
+// pass the event arguement into the function,then prevent default action to stop browser from auto refreshing.
+var createTaskHandler = function(event){
+    event.preventDefault()
+
     var listItemE1 = document.createElement('li')
     listItemE1.className = 'task-item'
     listItemE1.textContent = 'this is a new task'
     tasksToDoE1.appendChild(listItemE1)
 }
-saveBtn.addEventListener("click",createTaskHandler)
+
+form.addEventListener("submit",createTaskHandler)
