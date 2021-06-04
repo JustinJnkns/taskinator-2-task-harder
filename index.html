@@ -13,15 +13,29 @@
           <header>
               <h1 class="page-title">Taskinator 2</h1>
               <p>Click button below to add a new task!</p>
-              <button class="btn" id="save-task">Add Task</button>
+              <form id="task-form">
+                  <div class="form-group">
+                    <input type="text" name="task-name" placeholder="Enter Task Name"/>
+                  </div>
+                  <div class="form-group">
+                      <select name="task-type" class="select-dropdown">
+                          <!-- selected auto picks this option,disable prevents user from picking it -->
+                          <option value=""disable selected>Pick a Task Type</option>
+                          <option value="Print">Print</option>
+                          <option value="Web">Web</option>
+                          <option value="Mobile">Mobile</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                  <button class="btn" id="save-task" type="submit">Add Task</button>
+                  </div>
+                  </form>
           </header>
 
           <main class="page-content">
               <section class="task-list-wrapper">
                   <h2 class="list-title">Tasks To Do</h2>
-                  <ul class="tasks-to-do" id="tasks-to-do">
-                      <li class="task-item">Task will be added soon!</li>
-                  </ul>
+                  <ul class="tasks-to-do" id="tasks-to-do"></ul>
               </section>
           </main>
 

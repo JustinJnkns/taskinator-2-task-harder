@@ -1,3 +1,4 @@
+// ; Are optional in JS dont forget.
 var saveBtn = document.querySelector('#save-task')
 var tasksToDoE1 = document.querySelector('#tasks-to-do')
 var createTaskHandler = function(){
