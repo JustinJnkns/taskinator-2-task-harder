@@ -5,10 +5,19 @@ var tasksToDoE1 = document.querySelector('#tasks-to-do')
 // pass the event arguement into the function,then prevent default action to stop browser from auto refreshing.
 var createTaskHandler = function(event){
     event.preventDefault()
-
+var taskNameInput = document.querySelector("input[name='task-name']").value
+var taskTypeInput= document.querySelector("select[name='task-type']").value
+// Use console.dir() to make the console display data as a JavaScript object.
     var listItemE1 = document.createElement('li')
+    // add className for css styling to carry over.
     listItemE1.className = 'task-item'
-    listItemE1.textContent = 'this is a new task'
+    //add html and reassign text content to taskNameInput 
+    var taskInfoE1 = document.createElement('div')
+    taskInfoE1.className="task-info"
+    // add html content to div
+    taskInfoE1.innerHTML = "<h3 class='task-name'>"+taskNameInput + "</h3><span class='task-type'>"+ taskTypeInput+ "</span>"
+    listItemE1.appendChild(taskInfoE1)
+    // add entire list item to list
     tasksToDoE1.appendChild(listItemE1)
 }
 
