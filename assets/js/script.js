@@ -43,6 +43,8 @@ var listItemE1 = document.createElement('li')
 listItemE1.className = 'task-item'
 // add task id as a custom attribute
 listItemE1.setAttribute("data-task-id",taskIdCounter)
+// adds draggable attribute
+listItemE1.setAttribute('draggable','true')
 //add html and reassign text content to taskNameInput 
 var taskInfoE1 = document.createElement('div')
 taskInfoE1.className="task-info"
@@ -159,7 +161,47 @@ if (statusValue === 'to do'){
     tasksCompletedEl.appendChild(taskSelected)
 }
 }
+// drag and drop functionallity below
 
+var dragTaskHandler = function(event){
+    var taskId = event.target.getAttribute("data-task-id")
+    event.dataTransfer.setData("text/plain", taskId);
+    var getId = event.dataTransfer.getData("text/plain",taskId)
+    console.log("getId:",getId,typeof getId)
+
+}
+
+var dropZoneHandler =function(event){
+    // closest method searches up through the target el to ancestorial element, where query selector searches down
+    var taskListEl = event.target.closest('.task-list')
+    if (taskListEl){
+        event.preventDefault()
+        taskListEl.setAttribute("style", "background: rgba(68, 233, 255, 0.7); border-style: dashed;")
+    }
+}
+var dropTaskHandler = function(event){
+    // retrieve id from previously stored data via getData
+    var id = event.dataTransfer.getData("text/plain");
+    var draggableElement = document.querySelector("[data-task-id='"+ id+"'")
+    var dropZoneEl = event.target.closest('.task-list')
+    var statusType = dropZoneEl.id
+    var statusSelectEl = draggableElement.querySelector("select[name='status-change']");
+    if (statusType === "tasks-to-do") {
+        statusSelectEl.selectedIndex = 0;
+      } 
+      else if (statusType === "tasks-in-progress") {
+        statusSelectEl.selectedIndex = 1;
+      } 
+      else if (statusType === "tasks-completed") {
+        statusSelectEl.selectedIndex = 2;
+      }
+
+    dropZoneEl.appendChild(draggableElement);
+}
 pageContent.addEventListener("change",taskStatusChangeHandler)
 pageContent.addEventListener('click',taskButtonHandler)
+pageContent.addEventListener("dragstart",dragTaskHandler)
+// drag over divines zone which item,element,ect. can be dropped
+pageContent.addEventListener("dragover",dropZoneHandler)
+pageContent.addEventListener("drop",dropTaskHandler)
 form.addEventListener("submit",taskFormHandler)
